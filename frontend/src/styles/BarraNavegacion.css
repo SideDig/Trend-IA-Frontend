@@ -1,0 +1,27 @@
+.contenedor_BarraNavegacion{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid black;
+}
+
+.Alinear_logo_titulo{
+    display: flex;
+    align-items: center; 
+}
+
+.Alinear_opciones{
+    gap: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.input_search{
+    width: 70vh;
+    border: none;
+    border-bottom: 3px solid black;
+    outline: none;
+}
