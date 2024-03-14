@@ -4,6 +4,7 @@ import "../styles/Inicio.css"
 import ModalPresupuesto from "../components/ModalPresupuestos.jsx"; 
 import { useState } from "react";
 
+
 function Inicio() {
   const [modalVisible, setModalVisible] = useState(false);
   return (
