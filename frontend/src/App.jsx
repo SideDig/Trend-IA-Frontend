@@ -3,7 +3,7 @@ import RegistroLogin from "./pages/viewRegisterLogin";
 import Inicio from "./pages/Inicio";
 import Principal from "./pages/Principal";
 import Categorias from "./pages/Categorias";
-import Subscripciones from "./pages/Subscripciones";
+import Suscripciones from "./pages/Suscripciones";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <Route path="/registro" element={<RegistroLogin />} />
           <Route path="/inicio" element={<Inicio />} />
           <Route path="/categoria" element={<Categorias />} />
-          <Route path="/subscripciones" element={<Subscripciones />} />
+          <Route path="/suscripciones" element={<Suscripciones />} />
         </Routes>
       </Router>
 
