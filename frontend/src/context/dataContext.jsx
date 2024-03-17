@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from "react";
 import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
-
+import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
 
 const DataContext = createContext();
 
@@ -15,11 +15,12 @@ export const useDataContext = () => {
 
 // eslint-disable-next-line react/prop-types
 export const DataProvider = ({ children }) => {
-
   const [Usuarios, setUsuarios] = useState([]);
   const [Usuario, setUsuario] = useState([]);
+  const [Categorias, setCategorias] = useState([]);
+  const [Categoria, setCategoria] = useState(null); 
 
-  const ObterUsuarios = async () => {
+  const ObtenerUsuarios = async () => {
     try {
       const response = await obtenerUsuarios();
       setUsuarios(response.data);
@@ -37,14 +38,35 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const obtenerTodasCategorias = async () => {
+    try {
+      const response = await ObtenerCategorias();
+      setCategorias(response.data.categorias);
+    } catch (error) {
+      console.error("Error al obtener las categorías:", error);
+    }
+  };
+
+  const obtenerCategoriaPorId = async (id) => {
+    try {
+      const response = await ObtenerCategoria(id);
+      setCategoria(response.data.categoria); 
+    } catch (error) {
+      console.error("Error al obtener la categoría:", error);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
-        ObterUsuarios,
+        ObtenerUsuarios,
         Usuarios,
         Usuario,
-        obtenerUsuarioPorId
-       
+        obtenerUsuarioPorId,
+        obtenerTodasCategorias,
+        obtenerCategoriaPorId,
+        Categorias,
+        Categoria
       }}
     >
       {children}

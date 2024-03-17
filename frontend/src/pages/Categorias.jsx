@@ -1,46 +1,38 @@
+import { useEffect } from "react";
 import BarraNavegacion from "../components/BarraNavegacion";
 import Cards_productos from "../components/Cards_productos";
+import { useDataContext } from "../context/dataContext";
 
 function Categorias() {
-    return (
-        <>
-            <header>
-                <BarraNavegacion />
-            </header>
+  const { obtenerTodasCategorias, Categorias } = useDataContext();
 
-            <div className="border-b-2 border-black mx-8 my-0 py-4">
-                <h1 className="text-2xl">Celulares</h1>
+  useEffect(() => {
+    obtenerTodasCategorias();
+  }, [obtenerTodasCategorias]);
+
+  return (
+    <>
+      <header>
+        <BarraNavegacion />
+      </header>
+
+      {Categorias.map((categoria, index) => (
+        <div key={index}>
+          <div className="border-b-2 border-black mx-8 my-0 py-4">
+            <h1 className="text-2xl">{categoria[1]}</h1>
+          </div>
+
+          <div className="mx-11 my-0 py-4 ">
+            <div className="grid grid-cols-5 gap-4 ">
+              {Categorias.map((producto, index) => (
+                <Cards_productos key={index} producto={producto} />
+              ))}
             </div>
-
-            <div className="mx-11 my-0 py-4 ">
-                <div className="grid grid-cols-5 gap-4 ">
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                </div>
-
-            </div>
-
-
-            {/* AQUI VA OTRA CATEGORIA*/}
-            <div className="border-b-2 border-black mx-8 my-0 py-4">
-                <h1 className="text-2xl">Computadoras</h1>
-            </div>
-
-            <div className="mx-11 my-0 py-4 ">
-                <div className="grid grid-cols-5 gap-4 ">
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                    <Cards_productos />
-                </div>
-
-            </div>
-        </>
-    )
+          </div>
+        </div>
+      ))}
+    </>
+  );
 }
 
-export default Categorias
+export default Categorias;
