@@ -7,6 +7,7 @@ import Suscripciones from "./pages/Suscripciones";
 import { AuthProvider } from "./context/authContext";
 import RutaProtegida from "./Rutaprotegida/RutaProtegida";
 import { DataProvider } from "./context/dataContext";
+import Categoria from "./pages/Categoria";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
               {/* Rutas protegidas que requieren inicio de sesión */}
               <Route element={<RutaProtegida />}>
                 <Route path="/inicio" element={<Inicio />} />
-                <Route path="/categoria" element={<Categorias />} />
+                <Route path="/categorias" element={<Categorias />} />
+                <Route path="/categorias/:idC" element={<Categoria />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
               </Route>
             </Routes>

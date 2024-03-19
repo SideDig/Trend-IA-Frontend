@@ -20,7 +20,7 @@ function BarraNavegacion() {
       <input className="input_search" type="search" placeholder="Buscar" />
       <div className="Alinear_opciones">
         <Link style={{textDecoration:"none", color:"black"}} to=""><p style={{fontSize:"16px"}}>Estadisticas</p></Link>
-        <Link style={{textDecoration:"none", color:"black"}} to="/categoria"><p style={{fontSize:"16px"}}>Categorias</p></Link>
+        <Link style={{textDecoration:"none", color:"black"}} to="/categorias"><p style={{fontSize:"16px"}}>Categorias</p></Link>
         <Link style={{textDecoration:"none", color:"black"}} to=""><p style={{fontSize:"16px"}}>Historial</p></Link>
       </div>
       

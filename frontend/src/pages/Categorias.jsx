@@ -1,36 +1,29 @@
 import { useEffect } from "react";
 import BarraNavegacion from "../components/BarraNavegacion";
-import Cards_productos from "../components/Cards_productos";
+import CardCategoria from "../components/CardCategoria";
 import { useDataContext } from "../context/dataContext";
+import { Link } from "react-router-dom";
 
 function Categorias() {
   const { obtenerTodasCategorias, Categorias } = useDataContext();
 
   useEffect(() => {
     obtenerTodasCategorias();
-  }, [obtenerTodasCategorias]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <header>
         <BarraNavegacion />
       </header>
-
-      {Categorias.map((categoria, index) => (
-        <div key={index}>
-          <div className="border-b-2 border-black mx-8 my-0 py-4">
-            <h1 className="text-2xl">{categoria[1]}</h1>
-          </div>
-
-          <div className="mx-11 my-0 py-4 ">
-            <div className="grid grid-cols-5 gap-4 ">
-              {Categorias.map((producto, index) => (
-                <Cards_productos key={index} producto={producto} />
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
+      <div className="flex flex-wrap justify-center">
+        {Categorias.map(categoria  => (
+          <Link to={`/categorias/${categoria[0]}`} key={categoria[0]}>
+           <CardCategoria nombre={categoria[1]} img={categoria[3]}  />
+          </Link>
+        ))}
+      </div>
     </>
   );
 }

@@ -18,7 +18,7 @@ export const DataProvider = ({ children }) => {
   const [Usuarios, setUsuarios] = useState([]);
   const [Usuario, setUsuario] = useState([]);
   const [Categorias, setCategorias] = useState([]);
-  const [Categoria, setCategoria] = useState(null); 
+  const [Categoria, setCategoria] = useState([]);
 
   const ObtenerUsuarios = async () => {
     try {
@@ -29,9 +29,9 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const obtenerUsuarioPorId = async (id) => { 
+  const obtenerUsuarioPorId = async () => { 
     try {
-      const response = await obtenerUsuario(id);
+      const response = await obtenerUsuario();
       setUsuario(response.data);
     } catch (error) {
       console.error("Error al obtener las personas:", error);
@@ -47,12 +47,13 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const obtenerCategoriaPorId = async (id) => {
+  const obtenerCategoriaPorId = async (idC) => {
     try {
-      const response = await ObtenerCategoria(id);
-      setCategoria(response.data.categoria); 
+      const response = await ObtenerCategoria(idC);
+      setCategoria(response.data.categoria);
     } catch (error) {
       console.error("Error al obtener la categoría:", error);
+      return null;
     }
   };
 

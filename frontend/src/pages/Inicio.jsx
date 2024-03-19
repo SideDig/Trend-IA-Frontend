@@ -20,6 +20,7 @@ function Inicio() {
           {modalVisible && <ModalPresupuesto />}
         </div>
       </div>
+      
       <div className="mx-11 my-0 py-4 ">
         <div className="grid grid-cols-5 gap-4 ">
           <Cards_productos />
