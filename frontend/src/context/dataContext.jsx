@@ -23,16 +23,16 @@ export const DataProvider = ({ children }) => {
   const ObtenerUsuarios = async () => {
     try {
       const response = await obtenerUsuarios();
-      setUsuarios(response.data);
+      setUsuarios(response.data.usuarios);
     } catch (error) {
       console.error("Error al obtener las personas:", error);
     }
   };
 
-  const obtenerUsuarioPorId = async () => { 
+  const obtenerUsuarioPorId = async (idU) => { 
     try {
-      const response = await obtenerUsuario();
-      setUsuario(response.data);
+      const response = await obtenerUsuario(idU);
+      setUsuario(response.data.usuario);
     } catch (error) {
       console.error("Error al obtener las personas:", error);
     }

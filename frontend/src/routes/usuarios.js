@@ -2,4 +2,4 @@ import axios from "./axios.js";
 
 export const obtenerUsuarios = () => axios.get('/usuarios')
 
-export const obtenerUsuario = (id) => axios.get(`/usuarios/${id}`)
+export const obtenerUsuario = (idU) => axios.get(`/usuarios/${idU}`)

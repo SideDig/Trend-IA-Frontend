@@ -1,11 +1,7 @@
-import Swal from 'sweetalert2';
 import { createContext, useContext, useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
-import {
-  registerRequest,
-  loginRequest,
-  logOutRequest,
-} from "../routes/auth";
+import { registerRequest, loginRequest, logOutRequest } from "../routes/auth";
 
 export const AuthContext = createContext();
 
@@ -34,20 +30,24 @@ export const AuthProvider = ({ children }) => {
   const registro = async (user) => {
     try {
       const res = await registerRequest(user);
-      setIsAuthenticated(true);
-      setUser(res.data);
-      Cookies.set('access_token', res.data.access_token, { expires: 7 }); // Cookie expira en 7 días
+      if (res.data && res.data.usuario) {
+        setIsAuthenticated(true);
+        setUser(res.data.usuario);
+        Cookies.set('access_token', res.data.access_token, { expires: 7 });
+      }
     } catch (error) {
-      setErrors(error.response);
+      setErrors(error.response.data.errors);
     }
   };
 
   const IniciarSesion = async (data) => {
     try {
       const res = await loginRequest(data);
-      setIsAuthenticated(true);
-      setUser(res.data);
-      Cookies.set('access_token', res.data.access_token, { expires: 7 }); // Cookie expira en 7 días
+      if (res.data && res.data.user) {
+        setIsAuthenticated(true);
+        setUser(res.data.user);
+        Cookies.set('access_token', res.data.access_token, { expires: 7 });
+      }
     } catch (error) {
       if (error.response && error.response.status === 404) {
         Swal.fire({
@@ -88,16 +88,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        registro,
-        IniciarSesion,
-        user,
-        logout: confirmLogout,
-        isAuthenticated,
-        errors,
-      }}
-    >
+    <AuthContext.Provider value={{ registro, IniciarSesion, user, logout: confirmLogout, isAuthenticated, errors }}>
       {children}
     </AuthContext.Provider>
   );
