@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 import Cookies from 'js-cookie';
-import { registerRequest, loginRequest, logOutRequest } from "../routes/auth";
+import { registerRequest, loginRequest, logOutRequest, getUserProfile } from "../routes/auth";
+
 
 export const AuthContext = createContext();
 
@@ -23,20 +24,34 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedToken = Cookies.get('access_token');
     if (storedToken) {
-      setIsAuthenticated(true);
+      const config = {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      };
+      getUserProfile(config).then(response => {
+        setIsAuthenticated(true);
+        setUser(response.data.user);
+      }).catch(error => {
+        console.error(error);
+        Cookies.remove('access_token');
+      });
     }
   }, []);
 
   const registro = async (user) => {
     try {
       const res = await registerRequest(user);
-      if (res.data && res.data.usuario) {
-        setIsAuthenticated(true);
-        setUser(res.data.usuario);
+      if (res.data && res.data.access_token) { 
         Cookies.set('access_token', res.data.access_token, { expires: 7 });
+        setIsAuthenticated(true);
+        setUser(res.data.usuario); 
+      } else {
+        
+        console.error("No se recibió token de acceso del servidor");
+        setErrors([...errors, "No se pudo iniciar sesión automáticamente después del registro. Intente iniciar sesión manualmente."]);
       }
     } catch (error) {
-      setErrors(error.response.data.errors);
+      console.error("Error durante el registro:", error.response.data);
+      setErrors(error.response.data.errors || ["Error desconocido durante el registro."]);
     }
   };
 

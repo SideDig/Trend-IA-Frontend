@@ -39,7 +39,7 @@ const Login = ({ swapPanel, setSwapPaneltrue }) => {
           )}
           <input
             className="formButton"
-            type="contraseña"
+            type="password"
             {...register("contraseña", { required: true })}
             placeholder="Contraseña"
           />

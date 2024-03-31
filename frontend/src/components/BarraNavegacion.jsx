@@ -29,7 +29,7 @@ function BarraNavegacion() {
       <img width="30px" height="auto" src="/src/assets/logo_carritoCompras.png" alt="Carrito" />
       {isAuthenticated && user ? (
         <>
-          <span style={{ marginRight: "20px" }}>Hola, {user.nombre}</span>
+          <span>Hola, {user.nombre}</span>
           <button onClick={CerrarSesion}>Cerrar sesión</button>
         </>
       ) : (

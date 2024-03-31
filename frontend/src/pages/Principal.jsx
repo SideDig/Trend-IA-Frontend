@@ -4,8 +4,9 @@ import { useInView } from 'react-intersection-observer';
 
 function Principal() {
     const urlLogoTrendIA = 'https://i.imgur.com/zEewjjl.jpg';
-    const videoPresentacion1 = 'https://res.cloudinary.com/dmv6rfxeb/video/upload/v1710053886/presentacion1.mp4';
-
+    const videoPresentacion1 = 'https://res.cloudinary.com/dmv6rfxeb/video/upload/v1711923677/a0unz4wap3mvyelwtzzq.mp4';
+    const videoPresentacion2 = 'https://res.cloudinary.com/dmv6rfxeb/video/upload/v1711922990/wgmun4wx3aiawyqk9usy.mp4';
+    const videoPresentacion3 = 'https://res.cloudinary.com/dmv6rfxeb/video/upload/v1711923326/yyzmsj8bzyzvxq86aaxp.mp4'
     // eslint-disable-next-line react/prop-types
     function Section({ children }) {
         const { ref, inView } = useInView({
@@ -76,8 +77,8 @@ function Principal() {
                     </div>
                 </div>
 
-                <h2 className="text-[20px] mx-28 my-7">Acerca de Trend IA</h2>
-
+                <h2 className="text-[30px] mx-28 my-7 font-bold">Acerca de Trend IA</h2>
+                
                 <div className="mx-28">
                     <Section>
                         <div className="w-96 h-54 overflow-hidden">
@@ -92,15 +93,14 @@ function Principal() {
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1 }}
                             >
-                                ¡Potencia tus ventas!
+                                 Descubre el futuro de tus ventas
                             </motion.h2>
                             <motion.p className="text-[18px] text-gray-800"
                                 initial={{ y: 50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1 }}
                             >
-                                En TREND IA, utilizamos el poder del machine learning para predecir con precisión las tendencias de ventas futuras.
-                            </motion.p>
+                            Con TREND IA, desbloquea el potencial de tus productos antes que nadie. Utilizamos análisis avanzados y machine learning para predecir las tendencias de venta, permitiéndote estar siempre un paso adelante. Imagina conocer el próximo gran éxito antes de que suceda. Eso es lo que ofrecemos.                            </motion.p>
                         </div>
                     </Section>
                     <br />
@@ -111,19 +111,18 @@ function Principal() {
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1 }}
                             >
-                                ¡Un enfoque innovador!
+                                Estrategia basada en datos, éxito asegurado
                             </motion.h2>
                             <motion.p className="text-[18px] text-gray-800"
                                 initial={{ y: 50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1 }}
                             >
-                                Nuestro enfoque innovador te ayudará a potenciar tus ventas.
-                            </motion.p>
+                            No es solo sobre predecir; es sobre crear oportunidades. Nuestro enfoque único integra datos históricos con señales del mercado en tiempo real para ofrecerte insights accionables.                             </motion.p>
                         </div>
                         <div className="w-96 h-54 overflow-hidden">
                             <video className="w-full h-full object-cover" autoPlay loop muted>
-                                <source src={videoPresentacion1} type="video/mp4" />
+                                <source src={videoPresentacion3} type="video/mp4" />
                                 Tu navegador no soporta la reproducción de videos.
                             </video>
                         </div>
@@ -133,7 +132,7 @@ function Principal() {
                     <Section>
                         <div className="w-96 h-54 overflow-hidden">
                             <video className="w-full h-full object-cover" autoPlay loop muted>
-                                <source src={videoPresentacion1} type="video/mp4" />
+                                <source src={videoPresentacion2} type="video/mp4" />
                                 Tu navegador no soporta la reproducción de videos.
                             </video>
                         </div>
@@ -157,7 +156,7 @@ function Principal() {
                 </div>
 
                 <div className="flex justify-center space-x-8 my-10">
-                    <div className="bg-white rounded-lg shadow-lg p-6">
+                    <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200">
                         <h2 className="text-[19px] font-bold text-center mb-4">Prueba gratis</h2>
                         <ul className="list-none">
                             <li className="flex items-center mb-4">
@@ -183,7 +182,7 @@ function Principal() {
                         </ul>
                     </div>
 
-                    <div className="bg-white rounded-lg shadow-lg p-6">
+                    <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200">
                         <h2 className="text-[19px] font-bold text-center mb-4">Premium</h2>
                         <ul className="list-none">
                             <li className="flex items-center mb-4">
