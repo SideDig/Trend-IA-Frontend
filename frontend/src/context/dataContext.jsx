@@ -1,6 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
 import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
+import { obtenerProductos, obtenerProductosPorCategoria } from "../routes/productos";
 
 const DataContext = createContext();
 
@@ -19,6 +20,7 @@ export const DataProvider = ({ children }) => {
   const [Usuario, setUsuario] = useState([]);
   const [Categorias, setCategorias] = useState([]);
   const [Categoria, setCategoria] = useState([]);
+  const [Productos, setProductos] = useState([]);
 
   const ObtenerUsuarios = async () => {
     try {
@@ -29,7 +31,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const obtenerUsuarioPorId = async (idU) => { 
+  const obtenerUsuarioPorId = async (idU) => {
     try {
       const response = await obtenerUsuario(idU);
       setUsuario(response.data.usuario);
@@ -57,6 +59,25 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const obtenerlosProductos = async () => {
+    try {
+      const response = await obtenerProductos();
+      setProductos(response.data.productos);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
+    }
+  }
+
+  const obtenerProductosDeCategoria = async (idC) => {
+    try {
+      const response = await obtenerProductosPorCategoria(idC);
+      setProductos(response.data.productos);
+    } catch (error) {
+      console.error("Error al obtener los productos de la categoría:", error);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -67,7 +88,10 @@ export const DataProvider = ({ children }) => {
         obtenerTodasCategorias,
         obtenerCategoriaPorId,
         Categorias,
-        Categoria
+        Categoria,
+        obtenerlosProductos,
+        Productos,
+        obtenerProductosDeCategoria
       }}
     >
       {children}

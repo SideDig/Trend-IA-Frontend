@@ -1,11 +1,21 @@
 import BarraNavegacion from "../components/BarraNavegacion";
 import Cards_productos from "../components/Cards_productos";
 import "../styles/Inicio.css"
-import ModalPresupuesto from "../components/ModalPresupuestos.jsx"; 
-import { useState } from "react";
+import ModalPresupuesto from "../components/ModalPresupuestos.jsx";
+import { useState, useEffect } from "react";
+import { useDataContext } from "../context/dataContext";
 
 
 function Inicio() {
+  const { obtenerlosProductos, Productos } = useDataContext();
+
+  useEffect(() => {
+    obtenerlosProductos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(Productos)
+
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
@@ -20,14 +30,11 @@ function Inicio() {
           {modalVisible && <ModalPresupuesto />}
         </div>
       </div>
-      
+
       <div className="mx-11 my-0 py-4 ">
         <div className="grid grid-cols-5 gap-4 ">
-          <Cards_productos />
-          <Cards_productos />
-          <Cards_productos />
-          <Cards_productos />
-          <Cards_productos />
+          <Cards_productos/>
+
         </div>
 
       </div>
