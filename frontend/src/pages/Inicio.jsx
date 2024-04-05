@@ -2,22 +2,15 @@ import BarraNavegacion from "../components/BarraNavegacion";
 import Cards_productos from "../components/Cards_productos";
 import "../styles/Inicio.css"
 import ModalPresupuesto from "../components/ModalPresupuestos.jsx";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { useDataContext } from "../context/dataContext";
 
 function Inicio() {
-<<<<<<< HEAD
- 
-  
-
-  
-=======
   const { obtenerlosProductosPorTendencia, ProductosTendencia } = useDataContext();
 
   useEffect(() => {
     obtenerlosProductosPorTendencia();
   }, []);
->>>>>>> 85eaa69c61956cbe9c748f6d706d7dc545aa3d46
 
   const [modalVisible, setModalVisible] = useState(false);
   return (
