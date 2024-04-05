@@ -5,12 +5,19 @@ import ModalPresupuesto from "../components/ModalPresupuestos.jsx";
 import { useState } from "react";
 
 
-
 function Inicio() {
+<<<<<<< HEAD
  
   
 
   
+=======
+  const { obtenerlosProductosPorTendencia, ProductosTendencia } = useDataContext();
+
+  useEffect(() => {
+    obtenerlosProductosPorTendencia();
+  }, []);
+>>>>>>> 85eaa69c61956cbe9c748f6d706d7dc545aa3d46
 
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -29,10 +36,12 @@ function Inicio() {
 
       <div className="mx-11 my-0 py-4 ">
         <div className="grid grid-cols-5 gap-4 ">
-          <Cards_productos/>
-
+          {
+            Object.values(ProductosTendencia).map(producto => (
+              <Cards_productos key={producto.id_p} producto={producto} tec={false} />
+            ))
+          }
         </div>
-
       </div>
     </>
   )

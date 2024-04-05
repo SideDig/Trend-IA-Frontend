@@ -44,7 +44,7 @@ function Categoria() {
             <div className="mx-11 my-0 py-4">
                 <div className="grid grid-cols-5 gap-4">
                     {Object.values(productosCombinados).map(producto => (
-                        <Cards_productos key={producto.id_p} producto={producto} />
+                        <Cards_productos key={producto.id_p} tec={true} producto={producto} />
                     ))}
                 </div>
             </div>

@@ -3,12 +3,14 @@ import RegistroLogin from "./pages/viewRegisterLogin";
 import Inicio from "./pages/Inicio";
 import Principal from "./pages/Principal";
 import Categorias from "./pages/Categorias";
+import Presupuestos from "./pages/presupuesto";
 import InfoProducto from "./pages/infoProducto";
 import Suscripciones from "./pages/Suscripciones";
 import { AuthProvider } from "./context/authContext";
 import RutaProtegida from "./Rutaprotegida/RutaProtegida";
 import { DataProvider } from "./context/dataContext";
 import Categoria from "./pages/Categoria";
+import Producto from "./pages/Producto";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
                 <Route path="/inicio" element={<Inicio />} />
                 <Route path="/categorias" element={<Categorias />} />
                 <Route path="/categorias/:idC" element={<Categoria />} />
+                <Route path="/producto/:idP" element={<Producto />} />
+                <Route path="/presupuestos/:idC/:ec/:pre" element={<Presupuestos />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
                 <Route path="/producto" element={<InfoProducto />} />
               </Route>
