@@ -12,7 +12,7 @@ function BarraNavegacion() {
   const CerrarSesion = handleSubmit(() => {
     logout();
   });
-  console.log("Datos del usuario:", user);
+
   return (
     <div className="contenedor_BarraNavegacion">
       <div className="Alinear_logo_titulo">

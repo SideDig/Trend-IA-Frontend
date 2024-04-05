@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
 import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
-import { obtenerProductos, obtenerProductosPorCategoria } from "../routes/productos";
+import { obtenerProductos, obtenerProductosPorCategoria, obtenerProductosTendencia, obtenerProductosPresupuesto } from "../routes/productos";
 
 const DataContext = createContext();
 
@@ -21,6 +21,9 @@ export const DataProvider = ({ children }) => {
   const [Categorias, setCategorias] = useState([]);
   const [Categoria, setCategoria] = useState([]);
   const [Productos, setProductos] = useState([]);
+  const [ProductosTendencia, setProductosTendencia] = useState([]);
+  const [ProductosPresupuesto, setProductosPresupuesto] = useState([]);
+
 
   const ObtenerUsuarios = async () => {
     try {
@@ -78,6 +81,28 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const obtenerlosProductosPorTendencia = async () => {
+    try {
+      const response = await obtenerProductosTendencia();
+      setProductosTendencia(response.data.productos);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
+    }
+  }
+
+  const obtenerlosProductosPorPresupuesto = async (data) => {
+    try {
+      const response = await obtenerProductosPresupuesto(data);
+      setProductosPresupuesto(response.data.productos);
+      console.log("ppppppppppppppppppppp");
+      console.log(data);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
+    }
+  }
+
   return (
     <DataContext.Provider
       value={{
@@ -91,7 +116,11 @@ export const DataProvider = ({ children }) => {
         Categoria,
         obtenerlosProductos,
         Productos,
-        obtenerProductosDeCategoria
+        obtenerProductosDeCategoria,
+        obtenerlosProductosPorTendencia,
+        ProductosTendencia,
+        obtenerlosProductosPorPresupuesto,
+        ProductosPresupuesto
       }}
     >
       {children}
