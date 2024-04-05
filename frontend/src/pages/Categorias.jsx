@@ -19,7 +19,7 @@ function Categorias() {
       </header>
       <div className="flex flex-wrap justify-center">
         {Categorias.map(categoria  => (
-          <Link className="m-[30px]" to={`/categorias/${categoria[0]}`} key={categoria[0]}>
+          <Link className="m-[30px]" to={`/categorias/${categoria[1]}`} key={categoria[0]}>
            <CardCategoria nombre={categoria[1]} img={categoria[3]}  />
           </Link>
         ))}

@@ -3,6 +3,7 @@ import RegistroLogin from "./pages/viewRegisterLogin";
 import Inicio from "./pages/Inicio";
 import Principal from "./pages/Principal";
 import Categorias from "./pages/Categorias";
+import InfoProducto from "./pages/infoProducto";
 import Suscripciones from "./pages/Suscripciones";
 import { AuthProvider } from "./context/authContext";
 import RutaProtegida from "./Rutaprotegida/RutaProtegida";
@@ -26,6 +27,7 @@ function App() {
                 <Route path="/categorias" element={<Categorias />} />
                 <Route path="/categorias/:idC" element={<Categoria />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
+                <Route path="/producto" element={<InfoProducto />} />
               </Route>
             </Routes>
           </Router>
