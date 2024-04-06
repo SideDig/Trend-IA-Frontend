@@ -1,7 +1,7 @@
 import { createContext, useState, useContext } from "react";
 import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
 import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
-import { obtenerProductos, obtenerProductosPorCategoria, obtenerProductosTendencia, obtenerProductosPresupuesto, } from "../routes/productos";
+import { obtenerProductos, obtenerProductosPorCategoria, obtenerProductosTendencia, obtenerProductosPresupuesto, obtenerPredicionProduct } from "../routes/productos";
 
 const DataContext = createContext();
 
@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
   const [Productos, setProductos] = useState([]);
   const [ProductosTendencia, setProductosTendencia] = useState([]);
   const [ProductosPresupuesto, setProductosPresupuesto] = useState([]);
-  // const [PorductoPrediccion, setPorductoPrediccion ] = useState([]);
+  const [PorductoPrediccion, setPorductoPrediccion ] = useState([]);
 
 
   const ObtenerUsuarios = async () => {
@@ -103,13 +103,16 @@ export const DataProvider = ({ children }) => {
     }
   }
 
-  // const obtenerProdPredicciones = async (idPP) => {
-  //   try {
-  //     const response = await obtenerPredicionProduct
-  //   } catch (error) {
+  const obtenerProdPredicciones = async (idPP) => {
+    try {
+      const response = await obtenerPredicionProduct();
+      setPorductoPrediccion(response.data.productos);
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
       
-  //   }
-  // }
+    }
+  }
 
   return (
     <DataContext.Provider
@@ -128,7 +131,8 @@ export const DataProvider = ({ children }) => {
         obtenerlosProductosPorTendencia,
         ProductosTendencia,
         obtenerlosProductosPorPresupuesto,
-        ProductosPresupuesto
+        ProductosPresupuesto,
+        PorductoPrediccion
       }}
     >
       {children}
