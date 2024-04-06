@@ -19,13 +19,13 @@ function Cards_productos({ producto, tec }) {
             <p>Walmart: {producto.precioWalmart}</p>
             <p>Amazon: {producto.precioAmazon}</p>
           </div>
-          <div className="px-6 pt-4 pb-2 flex justify-between">
-            <Link className="m-[30px]" to={`/producto/${producto.id_p}`} key={producto.id_p}>
-            <button className="border-solid border-2 border-black py-1 px-3 rounded flex items-center">
+          <div className="px-6 pt-4 pb-2 flex">
+            <Link to={`/producto/${producto.id_p}`} key={producto.id_p}>
+            <button className="mx-2 border-solid border-2 border-black py-1 px-3 rounded flex items-center">
               <FaEye className="mr-1"/>Detalles
             </button>
             </Link>
-            <button className="border-solid border-2 border-black bg-black text-white py-1 px-4 rounded flex items-center">
+            <button className="bg-black text-white py-1 px-3 rounded flex items-center">
               <FaShoppingCart className="mr-1"/> Añadir
             </button>
           </div>
@@ -46,12 +46,12 @@ function Cards_productos({ producto, tec }) {
             <p>Marca: {producto.marca}</p>
           </div>
           <div className="px-6 pt-4 pb-2 flex justify-between">
-            <Link className="m-[30px]" to={`/producto/${producto.id_p}`} key={producto.id_p}>
+            <Link  to={`/producto/${producto.id_p}`} key={producto.id_p}>
             <button className="border-solid border-2 border-black py-1 px-3 rounded flex items-center">
               <FaEye className="mr-1"/>Detalles
             </button>
             </Link>
-            <button className="border-solid border-2 border-black bg-black text-white py-1 px-4 rounded flex items-center">
+            <button className="bg-black text-white py-1 px-3 rounded flex items-center">
               <FaShoppingCart className="mr-1"/> Añadir
             </button>
           </div>

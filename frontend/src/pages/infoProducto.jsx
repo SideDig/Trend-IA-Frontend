@@ -1,11 +1,6 @@
 import BarraNavegacion from "../components/BarraNavegacion";
 
-const items = [
-  { label: 'Ventas', value: '000' },
-  { label: 'Marca', value: '000' },
-  { label: 'Fecha Lanzamiento', value: '000' },
-  { label: 'Fecha Estimada', value: '2 días' }
-];
+
 
 function infoProducto() {
   return (

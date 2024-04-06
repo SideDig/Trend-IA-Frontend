@@ -4,7 +4,7 @@ import Inicio from "./pages/Inicio";
 import Principal from "./pages/Principal";
 import Categorias from "./pages/Categorias";
 import Presupuestos from "./pages/presupuesto";
-import InfoProducto from "./pages/infoProducto";
+
 import Suscripciones from "./pages/Suscripciones";
 import { AuthProvider } from "./context/authContext";
 import RutaProtegida from "./Rutaprotegida/RutaProtegida";
@@ -31,7 +31,6 @@ function App() {
                 <Route path="/producto/:idP" element={<Producto />} />
                 <Route path="/presupuestos/:idC/:ec/:pre" element={<Presupuestos />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
-                <Route path="/producto" element={<InfoProducto />} />
               </Route>
             </Routes>
           </Router>
