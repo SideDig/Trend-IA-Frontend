@@ -103,14 +103,13 @@ export const DataProvider = ({ children }) => {
     }
   }
 
-  const obtenerProdPredicciones = async (idPP) => {
+  const obtenerProdPredicciones = async (idP) => {
     try {
-      const response = await obtenerPredicionProduct();
+      const response = await obtenerPredicionProduct(idP);
       setPorductoPrediccion(response.data.productos);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
       return null;
-      
     }
   }
 
@@ -132,7 +131,8 @@ export const DataProvider = ({ children }) => {
         ProductosTendencia,
         obtenerlosProductosPorPresupuesto,
         ProductosPresupuesto,
-        PorductoPrediccion
+        PorductoPrediccion,
+        obtenerProdPredicciones
       }}
     >
       {children}

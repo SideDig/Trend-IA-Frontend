@@ -8,4 +8,4 @@ export const obtenerProductosPorCategoria = (idC) => axios.get(`/productos?nombr
 
 export const obtenerProductosTendencia = () => axios.get('/ventas')
 
-export const obtenerPredicionProduct = (idPP) => axios.get(`/productos/${idPP}/predict`)
+export const obtenerPredicionProduct = (idP) => axios.get(`/productos/${idP}/predict`)

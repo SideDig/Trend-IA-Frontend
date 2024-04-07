@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useDataContext } from '../context/dataContext';
-import BarraNavegacion from '../components/BarraNavegacion'; // Asegúrate de tener este componente
+import BarraNavegacion from '../components/BarraNavegacion'; 
+import Predicciones from '../components/predicciones';
 
 function Producto() {
   const { idP } = useParams();
@@ -40,14 +41,10 @@ function Producto() {
     { label: 'Ventas', value: detalleProducto.ventas || '000' },
     { label: 'Marca', value: detalleProducto.marca || 'N/A' },
     { label: 'Fecha Lanzamiento', value: detalleProducto.fecha_lanzamiento || 'N/D' },
-    { label: 'Fecha Estimada', value: detalleProducto.fecha_estimada || '2 días' },
+    { label: 'Fecha Estimada', value: detalleProducto.fecha_estimada || '0 días' },
   ] : [];
 
-  const tableData = [
-    // Datos de ejemplo, reemplaza con datos reales
-    { fecha: "2024-01-01", precio: "$1000" },
-    { fecha: "2024-02-01", precio: "$950" },
-  ];
+  
 
   if (!detalleProducto) return <div>Cargando información del producto...</div>;
 
@@ -91,30 +88,7 @@ function Producto() {
         </div>
       </div>
       
-      <table className="w-[20%] divide-y divide-black">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider border border-black">
-              Fecha
-            </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider border border-black">
-              Precio
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-black">
-          {tableData.map((row, index) => (
-            <tr key={index} className="border-b border-black">
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-black">
-                {row.fecha}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-black">
-                {row.precio}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Predicciones idP={idP} ecommerceSeleccionado={ecommerceSeleccionado} />
     </>
   );
 }
