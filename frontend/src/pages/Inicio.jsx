@@ -8,11 +8,13 @@ import { useDataContext } from "../context/dataContext";
 function Inicio() {
   const { obtenerlosProductosPorTendencia, ProductosTendencia } = useDataContext();
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    obtenerlosProductosPorTendencia();
+    obtenerlosProductosPorTendencia().then(() => setLoading(false));
   }, []);
 
-  const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <header>
@@ -28,13 +30,17 @@ function Inicio() {
       </div>
 
       <div className="mx-11 my-0 py-4 ">
-        <div className="grid grid-cols-5 gap-4 ">
-          {
-            Object.values(ProductosTendencia).map(producto => (
-              <Cards_productos key={producto.id_p} producto={producto} tec={false} />
-            ))
-          }
-        </div>
+        {loading ? (
+          <div>Cargando...</div> // Aquí puedes reemplazar este div con tu diseño de carga
+        ) : (
+          <div className="grid grid-cols-5 gap-4 ">
+            {
+              Object.values(ProductosTendencia).map(producto => (
+                <Cards_productos key={producto.id_p} producto={producto} tec={false} />
+              ))
+            }
+          </div>
+        )}
       </div>
     </>
   )

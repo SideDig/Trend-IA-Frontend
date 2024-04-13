@@ -2,6 +2,8 @@ import { createContext, useState, useContext } from "react";
 import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
 import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
 import { obtenerProductos, obtenerProductosPorCategoria, obtenerProductosTendencia, obtenerProductosPresupuesto, obtenerPredicionProduct } from "../routes/productos";
+import { obtenerProductosCarrito, insertarProductosCarrito, eliminarProductosCarrito, insertarCarrito, obtenerCarrito} from "../routes/carrito";
+import { insertarHistorialCompras, eliminarHistorialCompra, obtenerHistorialCompra, obtenerHistorialCompras } from "../routes/historial_compras";
 
 const DataContext = createContext();
 
@@ -24,6 +26,13 @@ export const DataProvider = ({ children }) => {
   const [ProductosTendencia, setProductosTendencia] = useState([]);
   const [ProductosPresupuesto, setProductosPresupuesto] = useState([]);
   const [PorductoPrediccion, setPorductoPrediccion ] = useState([]);
+  const [productosCarrito, setProductosCarrito] = useState([]);
+  const [iProductosCarrito, setInsertarProductosCarrito] = useState([]);
+  const [eProductosCarrito, setEliminarProductosCarrito] = useState([]);
+  const [HistorialCompras, setHistorialCompras] = useState([]);
+  const [iHistorialCompras, setInsertarHistorialCompras] = useState([]);
+  const [Carrito, setCarrito] = useState([]);
+  const [iCarrito, setInsertarCarrito] = useState([]);
 
 
   const ObtenerUsuarios = async () => {
@@ -113,6 +122,96 @@ export const DataProvider = ({ children }) => {
     }
   }
 
+  const obtenerProductosPorCarrito = async (idCP) => {
+    try {
+      const response = await obtenerProductosCarrito(idCP);
+      if (response) {
+        setProductosCarrito(response.data.productos);
+      } else {
+        console.error("No se recibió ninguna respuesta de la API");
+      }
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
+    }
+  }
+
+  const insertarProductosPorCarrito = async (data) => {
+    try {
+      const response = await insertarProductosCarrito(data);
+      setInsertarProductosCarrito(response.data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error al insertar los productos:", error);
+      return null;
+    }
+  }
+
+  const eliminarProductosPorCarrito = async (idCP) => {
+    try {
+      const response = await eliminarProductosCarrito(idCP);
+      if (response) {
+        setEliminarProductosCarrito(response.data.productos);
+      } else {
+        console.error("No se recibió ninguna respuesta de la API");
+      }
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      return null;
+    }
+  }
+
+  const insertarHistorialDeCompras = async (data) => {
+    try {
+      const response = await insertarHistorialCompras(data);
+      setInsertarHistorialCompras(response.data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error al insertar el Historial de Compras:", error);
+      return null;
+    }
+  }
+
+  const obtenerHistorialDeCompras = async (idU) => {
+    try {
+      const response = await obtenerHistorialCompras(idU);
+      if (response) {
+        setHistorialCompras(response.data);
+      } else {
+        console.error("No se recibió ninguna respuesta de la API");
+      }
+    } catch (error) {
+      console.error("Error al obtener el carrito:", error);
+      return null;
+    }
+  }
+
+  const crearCarritos = async (data) => {
+    try {
+      const response = await insertarCarrito(data);
+      setInsertarCarrito(response.data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error al insertar los productos:", error);
+      return null;
+    }
+  }
+
+  const obtenerPorCarrito = async (idU) => {
+    try {
+      const response = await obtenerCarrito(idU);
+      if (response) {
+        setCarrito(response.data);
+      } else {
+        console.error("No se recibió ninguna respuesta de la API");
+      }
+    } catch (error) {
+      console.error("Error al obtener el carrito:", error);
+      return null;
+    }
+  }
+  
+
   return (
     <DataContext.Provider
       value={{
@@ -132,7 +231,23 @@ export const DataProvider = ({ children }) => {
         obtenerlosProductosPorPresupuesto,
         ProductosPresupuesto,
         PorductoPrediccion,
-        obtenerProdPredicciones
+        obtenerProdPredicciones,
+        obtenerProductosPorCarrito,
+        productosCarrito,
+        insertarProductosPorCarrito,
+        iProductosCarrito,
+        eliminarProductosPorCarrito,
+        eProductosCarrito,
+        insertarHistorialDeCompras,
+        iHistorialCompras,
+        obtenerHistorialDeCompras,
+        HistorialCompras,
+        eliminarHistorialCompra,
+        obtenerHistorialCompra,
+        crearCarritos,
+        iCarrito,
+        obtenerPorCarrito,
+        Carrito
       }}
     >
       {children}

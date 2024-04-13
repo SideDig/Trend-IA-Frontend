@@ -1,8 +1,9 @@
-
 import "../styles/BarraNavegacion.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useForm } from "react-hook-form";
+import CarritoCompras from "./CarritoCompras";
+import { useState } from "react";
 
 function BarraNavegacion() {
   const { handleSubmit } = useForm();
@@ -12,6 +13,15 @@ function BarraNavegacion() {
   const CerrarSesion = handleSubmit(() => {
     logout();
   });
+
+  console.log(user);
+  // Agregar estado para controlar la visibilidad del modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para manejar el clic en el carrito
+  const handleCartClick = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="contenedor_BarraNavegacion">
@@ -25,10 +35,9 @@ function BarraNavegacion() {
         <Link style={{ textDecoration: "none", color: "black" }} to="/categorias"><p style={{ fontSize: "16px" }}>Categorías</p></Link>
         <Link style={{ textDecoration: "none", color: "black" }} to="/historial"><p style={{ fontSize: "16px" }}>Historial</p></Link>
       </div>
-
-      <img width="30px" height="auto" src="/src/assets/logo_carritoCompras.png" alt="Carrito" />
       {isAuthenticated && user ? (
         <>
+        <CarritoCompras  idU={user.id}/>
           <span>Hola, {user.nombre}</span>
           <button onClick={CerrarSesion}>Cerrar sesión</button>
         </>

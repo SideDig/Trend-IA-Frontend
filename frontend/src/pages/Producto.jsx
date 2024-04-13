@@ -12,7 +12,6 @@ function Producto() {
 
   useEffect(() => {
     obtenerlosProductos();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -43,8 +42,6 @@ function Producto() {
     { label: 'Fecha Lanzamiento', value: detalleProducto.fecha_lanzamiento || 'N/D' },
     { label: 'Fecha Estimada', value: detalleProducto.fecha_estimada || '0 días' },
   ] : [];
-
-  
 
   if (!detalleProducto) return <div>Cargando información del producto...</div>;
 

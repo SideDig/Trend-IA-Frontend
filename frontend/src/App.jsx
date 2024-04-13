@@ -11,6 +11,7 @@ import RutaProtegida from "./Rutaprotegida/RutaProtegida";
 import { DataProvider } from "./context/dataContext";
 import Categoria from "./pages/Categoria";
 import Producto from "./pages/Producto";
+import Historial from "./pages/Historial";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/producto/:idP" element={<Producto />} />
                 <Route path="/presupuestos/:idC/:ec/:pre" element={<Presupuestos />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
+                <Route path="/historial" element={<Historial />} />
               </Route>
             </Routes>
           </Router>

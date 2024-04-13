@@ -1,0 +1,84 @@
+
+.lista-historias{
+    /* border: 2px solid red; */
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 0;
+}
+
+.historia{
+    border: 1px solid rgb(0, 0, 0);
+    width: 80%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #ffffff;
+  box-shadow:  5px 5px 10px #cacaca,
+             -5px -5px 10px #f6f6f6;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding: 10px;
+    background-color: #F5F3F3;
+}
+.top>.rg{
+    display: flex;
+    flex-direction: column;
+}
+
+.top>.rg>div{
+    display: flex;
+    flex-direction: row;
+}
+.top>.rg>div>h4{
+    margin-left: 10px;
+}
+
+.top>.lf{
+    display: flex;
+}
+
+.top>.lf>button{
+    margin-left: 10px;
+}
+
+.bot{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.detalles, .producto{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.1px solid black;
+}
+.detalles>h4, .producto>h4{
+    width: 180px;
+    text-align: center;
+}
+.detalles>h4{
+    font-size: 15px;
+    font-weight: 600;
+}
+.lista-productos{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+
+.producto>img{
+    width: 200px;
+}

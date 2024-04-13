@@ -1,0 +1,43 @@
+
+h3{
+    font-size: 17px;
+    font-weight: 800;
+}
+.producto{
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.producto>img{
+    width: 200px;
+    height: 120px;
+    margin-right: 10px;
+}
+
+.footermodal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    height: auto;
+}
+.footermodal h2, .sub{
+    font-size: 21px;
+    font-weight: 600;
+}
+
+span>p{
+    margin: 5px;
+    font-size: 25px;
+    color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+span>p:hover{
+    background-color: rgb(239, 99, 99);
+    color: black;
+}
+
