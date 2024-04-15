@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useDataContext } from '../context/dataContext';
-import BarraNavegacion from '../components/BarraNavegacion'; 
+import BarraNavegacion from '../components/BarraNavegacion';
 import Predicciones from '../components/predicciones';
-
+import { useAuth } from "../context/authContext";
+import { Link } from 'react-router-dom';
 function Producto() {
   const { idP } = useParams();
+  const { user } = useAuth();
   const { Productos, obtenerlosProductos } = useDataContext();
   const [detalleProducto, setDetalleProducto] = useState(null);
   const [ecommerceSeleccionado, setEcommerceSeleccionado] = useState('');
@@ -27,7 +29,7 @@ function Producto() {
   useEffect(() => {
     if (ecommerceSeleccionado) {
       const productoActualizado = Productos.find(prod => prod.nombre === detalleProducto?.nombre && prod.ecommerce.toUpperCase() === ecommerceSeleccionado.toUpperCase());
-    
+
       if (productoActualizado) {
         setIdPo(productoActualizado.id_p);
         setDetalleProducto(productoActualizado);
@@ -88,8 +90,29 @@ function Producto() {
           </div>
         </div>
       </div>
-      
-      <Predicciones idP={idPo} ecommerceSeleccionado={ecommerceSeleccionado} />
+
+      <div className="relative">
+        <h1 className='border-b-2 py-2 border-black mb-5 mx-14 text-[27px] font-bold'>Predicción de Costos</h1>
+        <Predicciones idP={idPo} ecommerceSeleccionado={ecommerceSeleccionado} />
+        {user && user.suscripcion === 'FREE' && (
+          <div className="absolute inset-x-0 top-[70px] bottom-0 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div className="bg-black shadow-lg rounded-xl p-8 max-w-lg w-full border border-gray-700">
+              <h3 className="text-white text-3xl font-bold text-center">
+                Acceso Limitado
+              </h3>
+              <p className="text-white mt-4 text-center text-lg">
+                Lo sentimos, este contenido es exclusivo para suscriptores Premium.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <Link to={"/suscripciones"}><button className="bg-white text-black hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-300 rounded shadow">
+                  Suscríbete Ahora
+                </button></Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
     </>
   );
 }
