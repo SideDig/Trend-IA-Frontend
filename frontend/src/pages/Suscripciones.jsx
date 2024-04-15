@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+
 import BarraNavegacion from "../components/BarraNavegacion";
 import { useDataContext } from "../context/dataContext";
 import { useAuth } from "../context/authContext";
@@ -8,26 +8,19 @@ import Swal from 'sweetalert2';
 function Suscripciones() {
     const { editUsuarioSuscripcion } = useDataContext();
     const { user } = useAuth();
-    const [isPremiumActive, setIsPremiumActive] = useState(false);
+
 
     const handleSubscriptionChange = async (newPlan) => {
         if (user && user.suscripcion !== newPlan) {
             try {
                 await editUsuarioSuscripcion(user.id, newPlan);
-                setIsPremiumActive(newPlan === 'PREMIUM');
-                if (newPlan === 'PREMIUM') {
-                    // Configurar un temporizador para cambiar de vuelta a FREE después de 10 segundos
-                    setTimeout(() => {
-                        editUsuarioSuscripcion(user.id, 'FREE');
-                        setIsPremiumActive(false);
-                    }, 10000);
-                }
                 Swal.fire({
                     title: '¡Suscripción actualizada!',
                     text: `Ahora eres un suscriptor ${newPlan}.`,
                     icon: 'success',
                     confirmButtonText: 'Entendido'
                 }).then(() => {
+                    // Recargar la página después de actualizar la suscripción
                     window.location.reload();
                 });
             } catch (error) {
@@ -74,7 +67,6 @@ function Suscripciones() {
                         plan="PREMIUM"
                         handleSubscriptionChange={handleSubscriptionChange}
                         isSubscribed={user && user.suscripcion === 'PREMIUM'}
-                        isPremiumActive={isPremiumActive}
                     />
                 </div>
             </div>

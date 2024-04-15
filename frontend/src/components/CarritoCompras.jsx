@@ -42,8 +42,6 @@ function CarritoCompras({idU} ) {
     await eliminarProductosPorCarrito(id_cp);
     if(idCP!=null || idCP.length > 0){
        obtenerProductosPorCarrito(idCP); 
-    }else{
-      console.log("pfff", idCP);
     }
   };
 
@@ -120,7 +118,7 @@ function CarritoCompras({idU} ) {
             <div className="modal-content" onClick={e => e.stopPropagation()}>
               <span className="close" onClick={handleCloseModal}><p>X</p></span>
               <h2 className="sub">Carrito de compras</h2>
-              <div style={{overflowY: 'scroll',Height: '300px', padding:'20px'}}> {/* Aquí agregamos el scroll */}
+              <div style={{overflowY: 'scroll',Height: '300px', padding:'20px'}} className="pro"> {/* Aquí agregamos el scroll */}
                 {localProductos.map((producto, index) => (
                   <div key={index} className="producto">
                     <img src={producto.imagen_portada} alt={producto.nombre}/>

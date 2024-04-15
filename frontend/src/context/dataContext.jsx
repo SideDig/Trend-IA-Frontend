@@ -116,7 +116,6 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await obtenerProductosPresupuesto(data);
       setProductosPresupuesto(response.data.productos);
-      console.log(data);
     } catch (error) {
       console.error("Error al obtener los productos:", error);
       return null;
@@ -151,7 +150,6 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await insertarProductosCarrito(data);
       setInsertarProductosCarrito(response.data);
-      console.log(data);
     } catch (error) {
       console.error("Error al insertar los productos:", error);
       return null;
@@ -176,7 +174,6 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await insertarHistorialCompras(data);
       setInsertarHistorialCompras(response.data);
-      console.log(data);
     } catch (error) {
       console.error("Error al insertar el Historial de Compras:", error);
       return null;
@@ -201,7 +198,6 @@ export const DataProvider = ({ children }) => {
     try {
       const response = await insertarCarrito(data);
       setInsertarCarrito(response.data);
-      console.log(data);
     } catch (error) {
       console.error("Error al insertar los productos:", error);
       return null;

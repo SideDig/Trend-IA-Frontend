@@ -12,6 +12,7 @@ import { DataProvider } from "./context/dataContext";
 import Categoria from "./pages/Categoria";
 import Producto from "./pages/Producto";
 import Historial from "./pages/Historial";
+import Estadisticas from "./pages/Estadisticas";
 import RutaSuscripciones from "./Rutaprotegida/RutaSuscripciones";
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
                 <Route path="/presupuestos/:idC/:ec/:pre" element={<Presupuestos />} />
                 <Route path="/suscripciones" element={<Suscripciones />} />
                 <Route element={<RutaSuscripciones/>}> 
-                  <Route path="/historial" element={<Historial />} />
+                <Route path="/historial" element={<Historial />} />
+                  <Route path="/estadisticas" element={<Estadisticas />} />
                 </Route>
               </Route>
             </Routes>

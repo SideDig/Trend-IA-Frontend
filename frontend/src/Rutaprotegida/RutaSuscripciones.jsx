@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import Swal from 'sweetalert2';
 
@@ -9,7 +9,6 @@ const RutaSuscripciones = () => {
 
     useEffect(() => {
         if (!loading && user && user.suscripcion === 'FREE') {
-            navigate('/inicio');
             Swal.fire({
                 icon: 'error',
                 title: 'Acceso denegado',
@@ -21,6 +20,8 @@ const RutaSuscripciones = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/suscripciones');
+                } else {
+                    navigate('/inicio');
                 }
             });
         }
@@ -30,7 +31,14 @@ const RutaSuscripciones = () => {
         return <h1>Cargando...</h1>;
     }
 
-    return null;
+    if (!user || user.suscripcion === 'FREE') {
+        // Si el usuario no es válido o no tiene suscripción premium, no renderizamos nada aquí,
+        // la lógica de redirección ya está manejada en useEffect.
+        return null;
+    }
+
+    // Renderizar Outlet para permitir rutas anidadas
+    return <Outlet />;
 };
 
 export default RutaSuscripciones;

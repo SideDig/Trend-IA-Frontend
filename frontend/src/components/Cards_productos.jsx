@@ -39,7 +39,7 @@ function Cards_productos({ producto, tec }) {
   }if(tec==true){
     return (
       <>
-        <div className="max-w-72 rounded overflow-hidden shadow-lg p-1">
+        <div className="max-w-72 rounded overflow-hidden shadow-lg p-1 ">
           <div className="flex items-center justify-center">
             <img className="h-40 object-scale-down" src={producto.imagen_portada || "src/assets/img/productoEjemplo.jpg"} alt={producto.nombre || "Producto"} />
           </div>
