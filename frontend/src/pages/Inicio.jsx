@@ -4,6 +4,7 @@ import "../styles/Inicio.css"
 import ModalPresupuesto from "../components/ModalPresupuestos.jsx";
 import { useState, useEffect } from "react";
 import { useDataContext } from "../context/dataContext";
+import LoadingModal from "../components/LoadingModels.jsx";
 
 function Inicio() {
   const { obtenerlosProductosPorTendencia, ProductosTendencia } = useDataContext();
@@ -31,7 +32,7 @@ function Inicio() {
 
       <div className="mx-11 my-0 py-4 ">
         {loading ? (
-          <div>Cargando...</div> // Aquí puedes reemplazar este div con tu diseño de carga
+          <LoadingModal /> // Aquí puedes reemplazar este div con tu diseño de carga
         ) : (
           <div className="grid grid-cols-5 gap-4 ">
             {

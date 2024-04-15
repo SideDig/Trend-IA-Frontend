@@ -92,7 +92,7 @@ function Producto() {
       </div>
 
       <div className="relative">
-        <h1 className='border-b-2 py-2 border-black mb-5 mx-14 text-[27px] font-bold'>Predicción de Costos</h1>
+        <h1 className='border-b-2 border-black mb-5 mx-14 text-[27px] font-bold'>Predicción de Costos</h1>
         <Predicciones idP={idPo} ecommerceSeleccionado={ecommerceSeleccionado} />
         {user && user.suscripcion === 'FREE' && (
           <div className="absolute inset-x-0 top-[70px] bottom-0 flex items-center justify-center p-4 backdrop-blur-sm">
