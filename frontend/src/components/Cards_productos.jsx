@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {  useEffect } from "react";
 import { useDataContext } from '../context/dataContext';
 import { useAuth } from "../context/authContext";
+import Swal from "sweetalert2";
 
 function Cards_productos({ producto, tec }) {
   const { user } = useAuth();
@@ -23,7 +24,13 @@ function Cards_productos({ producto, tec }) {
       "id_p":producto.id_p
     }
     await insertarProductosPorCarrito(data); // Agrega await aquí
-    obtenerProductosPorCarrito(idCA);
+    await obtenerProductosPorCarrito(idCA);
+     // Alerta de éxito
+     Swal.fire(
+      '¡Añadido!',
+      '',
+      'success'
+    );
   };
 
   if (!producto) {

@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { obtenerUsuarios, obtenerUsuario } from "../routes/usuarios";
+import { obtenerUsuarios, obtenerUsuario, editarSuscripcionUsuario } from "../routes/usuarios";
 import { ObtenerCategorias, ObtenerCategoria } from "../routes/categorias";
 import { obtenerProductos, obtenerProductosPorCategoria, obtenerProductosTendencia, obtenerProductosPresupuesto, obtenerPredicionProduct } from "../routes/productos";
 import { obtenerProductosCarrito, insertarProductosCarrito, eliminarProductosCarrito, insertarCarrito, obtenerCarrito} from "../routes/carrito";
@@ -33,6 +33,7 @@ export const DataProvider = ({ children }) => {
   const [iHistorialCompras, setInsertarHistorialCompras] = useState([]);
   const [Carrito, setCarrito] = useState([]);
   const [iCarrito, setInsertarCarrito] = useState([]);
+  const [EditUsuario, setEditUsuario] = useState([]);
 
 
   const ObtenerUsuarios = async () => {
@@ -52,6 +53,16 @@ export const DataProvider = ({ children }) => {
       console.error("Error al obtener las personas:", error);
     }
   };
+
+  const editUsuarioSuscripcion = async (idU, nuevaSuscripcion) => {
+    try {
+      const response = await editarSuscripcionUsuario(idU, nuevaSuscripcion);
+      setEditUsuario(response.data.usuario);
+    } catch (error) {
+      console.error("Error al Editar la suscripción:", error);
+    }
+  }
+  
 
   const obtenerTodasCategorias = async () => {
     try {
@@ -219,6 +230,7 @@ export const DataProvider = ({ children }) => {
         Usuarios,
         Usuario,
         obtenerUsuarioPorId,
+        editUsuarioSuscripcion,
         obtenerTodasCategorias,
         obtenerCategoriaPorId,
         Categorias,
@@ -247,6 +259,7 @@ export const DataProvider = ({ children }) => {
         crearCarritos,
         iCarrito,
         obtenerPorCarrito,
+        EditUsuario,
         Carrito
       }}
     >

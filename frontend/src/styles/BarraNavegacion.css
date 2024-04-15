@@ -12,7 +12,7 @@
 }
 
 .Alinear_opciones{
-    gap: 80px;
+    gap: 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,3 +57,10 @@
     cursor: pointer;
   }
   
+  .prod-bus{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }

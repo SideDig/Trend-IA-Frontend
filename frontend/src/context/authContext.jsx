@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = Cookies.get('access_token');
@@ -30,22 +31,28 @@ export const AuthProvider = ({ children }) => {
       getUserProfile(config).then(response => {
         setIsAuthenticated(true);
         setUser(response.data.user);
+        setLoading(false); 
       }).catch(error => {
         console.error(error);
         Cookies.remove('access_token');
+        setLoading(false); 
       });
+    } else {
+      setLoading(false);
     }
   }, []);
 
   const registro = async (user) => {
     try {
       const res = await registerRequest(user);
-      if (res.data && res.data.access_token) { 
+      if (res.data && res.data.access_token) {
         Cookies.set('access_token', res.data.access_token, { expires: 7 });
         setIsAuthenticated(true);
         setUser(res.data.usuario); 
+        if (res.data.usuario.suscripcion === 'FREE') {
+          window.location.href = "/suscripciones";
+        }
       } else {
-        
         console.error("No se recibió token de acceso del servidor");
         setErrors([...errors, "No se pudo iniciar sesión automáticamente después del registro. Intente iniciar sesión manualmente."]);
       }
@@ -62,6 +69,9 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         setUser(res.data.user);
         Cookies.set('access_token', res.data.access_token, { expires: 7 });
+        if (res.data.user.suscripcion === 'FREE') {
+          window.location.href = "/suscripciones"; 
+        }
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -103,7 +113,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ registro, IniciarSesion, user, logout: confirmLogout, isAuthenticated, errors }}>
+    <AuthContext.Provider value={{ registro, IniciarSesion, user, logout: confirmLogout, isAuthenticated, errors, loading }}>
       {children}
     </AuthContext.Provider>
   );

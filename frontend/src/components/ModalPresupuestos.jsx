@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDataContext } from "../context/dataContext";
+import { useAuth } from "../context/authContext";
 
 function Modal() {
   const { obtenerTodasCategorias, Categorias } = useDataContext();
+  const { user } = useAuth();
 
   const [categoria, setCategoria] = useState(""); // Estado para mantener la opción seleccionada en categoría
   const [tienda, setTienda] = useState(""); // Estado para mantener la opción seleccionada en tienda
@@ -19,21 +21,27 @@ function Modal() {
     <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
       <div className="w-full max-w-md mx-auto bg-white rounded-lg p-4">
         <h2 className="text-center text-3xl mb-4">Presupuesto</h2>
+        {
+        user && user.suscripcion === 'FREE' && (
+          <span style={{ fontSize: '13px', textAlign: 'center' }}>Tienes 5 presupuestos, necesitas Premium para tener presupuestos ilimitados</span>
+
+        )
+        }
         <form className="border-2 border-black p-4 flex flex-col rounded-lg">
-        <select
-          name="categoria"
-          value={categoria} // Usa el estado categoria como valor
-          onChange={(e) => setCategoria(e.target.value)} // Actualiza el estado cuando cambie la selección
-          className="mb-2 border border-black rounded px-3 py-2 appearance-none bg-no-repeat bg-white bg-right"
-        >
-          <option value="">Selecciona tu categoría</option>
-          {Categorias && Categorias.map((categoria) => (
-            <option key={categoria[0]} value={categoria[0]}>{categoria[1]}</option>
-          ))}
-        </select>
+          <select
+            name="categoria"
+            value={categoria} // Usa el estado categoria como valor
+            onChange={(e) => setCategoria(e.target.value)} // Actualiza el estado cuando cambie la selección
+            className="mb-2 border border-black rounded px-3 py-2 appearance-none bg-no-repeat bg-white bg-right"
+          >
+            <option value="">Selecciona tu categoría</option>
+            {Categorias && Categorias.map((categoria) => (
+              <option key={categoria[0]} value={categoria[0]}>{categoria[1]}</option>
+            ))}
+          </select>
 
           <input
-            type="number"
+            type="number" min={1000}
             placeholder="Ingresa tu presupuesto"
             value={presupuesto} // Usa el estado presupuesto como valor
             onChange={(e) => setPresupuesto(e.target.value)} // Actualiza el estado cuando cambie el valor

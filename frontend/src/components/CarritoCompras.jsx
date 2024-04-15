@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { useDataContext } from '../context/dataContext';
 import '../styles/CarritoCompras.css'
 import { FaShoppingCart } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
 function CarritoCompras({idU} ) {
 
@@ -68,13 +70,43 @@ function CarritoCompras({idU} ) {
 
 
   const FinalizarCompra = async () => {
-    if(id_ca) {
-      handleCloseModal();
-      const data = {"id_ca": id_ca};
-      await insertarHistorialDeCompras(data);
-      await crearCarritos({"id_u": idU});
-      obtenerPorCarrito(idU);
-      setLocalProductos([]); // Vacía localProductos
+    if (id_ca) {
+      // Alerta de confirmación
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, finalizar compra!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleCloseModal();
+          const data = { "id_ca": id_ca };
+          insertarHistorialDeCompras(data)
+            .then(() => {
+              crearCarritos({ "id_u": idU });
+              obtenerPorCarrito(idU);
+              setLocalProductos([]); 
+  
+              // Alerta de éxito
+              Swal.fire(
+                '¡Finalizado!',
+                'Tu compra ha sido finalizada.',
+                'success'
+              );
+            })
+            .catch((error) => {
+              console.error('Error durante la finalización de la compra:', error);
+              Swal.fire(
+                'Error',
+                'Ha ocurrido un error al finalizar la compra.',
+                'error'
+              );
+            });
+        }
+      });
     }
   }
   
