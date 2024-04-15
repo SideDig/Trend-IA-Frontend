@@ -9,6 +9,8 @@ function Producto() {
   const { Productos, obtenerlosProductos } = useDataContext();
   const [detalleProducto, setDetalleProducto] = useState(null);
   const [ecommerceSeleccionado, setEcommerceSeleccionado] = useState('');
+  const [idPo, setIdPo] = useState(null);
+
 
   useEffect(() => {
     obtenerlosProductos();
@@ -25,7 +27,9 @@ function Producto() {
   useEffect(() => {
     if (ecommerceSeleccionado) {
       const productoActualizado = Productos.find(prod => prod.nombre === detalleProducto?.nombre && prod.ecommerce.toUpperCase() === ecommerceSeleccionado.toUpperCase());
+    
       if (productoActualizado) {
+        setIdPo(productoActualizado.id_p);
         setDetalleProducto(productoActualizado);
       }
     }
@@ -85,7 +89,7 @@ function Producto() {
         </div>
       </div>
       
-      <Predicciones idP={idP} ecommerceSeleccionado={ecommerceSeleccionado} />
+      <Predicciones idP={idPo} ecommerceSeleccionado={ecommerceSeleccionado} />
     </>
   );
 }

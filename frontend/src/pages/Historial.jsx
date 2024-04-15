@@ -13,8 +13,6 @@ const Historial = () => {
     obtenerHistorialDeCompras(idU);
   }, [])
 
-  console.log("ttttttttttttttttttttttttttt");
-  console.log(HistorialCompras.historial_compras);
   const [isOpen, setIsOpen] = useState({}); // Cambiamos isOpen a un objeto
 
   const toggleOpen = (clave) => { // Recibimos la clave del carrito
